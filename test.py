@@ -53,38 +53,29 @@ def create_callback_server():
 
 # Make an authenticated API call using the given rauth session.
 def get_api_resource(session):
+    resource_url = raw_input("Resource relative url (e.g. %s): " %
+        DEFAULT_API_RESOURCE) or DEFAULT_API_RESOURCE
 
-    print('\n')
-    print('1 - Update students database')
-    print('2 - Update students exercises info')
-    print('\n')
-    op = raw_input('Option')
+    url = SERVER_URL + resource_url 
+    split_url = url.split('?', 1)
+    params = {}
 
-    if(op):
-        resource_url = "/api/v1/user/students"
-        '''resource_url = raw_input("Resource relative url (e.g. %s): " %
-            DEFAULT_API_RESOURCE) or DEFAULT_API_RESOURCE
-        '''
-        url = SERVER_URL + resource_url 
-        split_url = url.split('?', 1)
-        params = {}
+    # Separate out the URL's parameters, if applicable.
+    if len(split_url) == 2:
+        url = split_url[0]
+        params = cgi.parse_qs(split_url[1], keep_blank_values=False)
 
-        # Separate out the URL's parameters, if applicable.
-        if len(split_url) == 2:
-            url = split_url[0]
-            params = cgi.parse_qs(split_url[1], keep_blank_values=False)
+    start = time.time()
+    response = session.get(url, params=params)
+    end = time.time()
 
-        start = time.time()
-        response = session.get(url, params=params)
-        end = time.time()
-
-        print("\n")
-        #print(type(response.text))
-        dir_ = raw_input("Dir and extension:")
-        f = open(str(dir_),'a')
-        f.write(response.text.encode('utf-8'))
-        f.close();
-        #print(response.text)
+    print("\n")
+    #print(type(response.text))
+    dir_ = raw_input("Dir and extension:")
+    f = open(str(dir_),'a')
+    f.write(response.text.encode('utf-8'))
+    f.close();
+    #print(response.text)
     print("\nTime: %ss\n" % (end - start))
 
 def run_tests():

@@ -1,0 +1,11 @@
+/api/v1/user/exercises?username=ChristiandeP&kaid=kaid_582342162202696291534459&email=christiandepaul44@gmail.com
+
+
+/api/v1/user/exercises?username=jordeva&kaid=kaid_722490551601208708950998&email=jordevalucas@hotmail.com
+
+
+/api/v1/user/exercises?username=FranciscoCampos0&kaid=kaid_778715081470268444446100&email=campos.junior.ifrn@gmail.com
+
+Exercício detalhado
+
+/api/v1/user/exercises/continuity?username=ChristiandeP&kaid=kaid_582342162202696291534459&email=christiandepaul44@gmail.com
